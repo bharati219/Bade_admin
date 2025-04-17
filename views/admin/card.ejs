@@ -1,0 +1,67 @@
+<%-include("navbar.ejs")%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Add New Card</h2>
+    <form action="/admin/add_card" method="POST" enctype="multipart/form-data" class="mb-4">
+        <div class="mb-3">
+            <label class="form-label">Main Heading</label>
+            <input type="text" name="main_heading" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="2" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            <input type="file" name="photo" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Add Card</button>
+    </form>
+    <table class="table table-bordered text-center">
+        <thead class="table-success">
+            <tr>
+                <th>SR NO</th>
+                <th>Image</th>
+                <th>Main Heading</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (cards.length > 0) { %>
+                <% cards.forEach((card, i) => { %>
+                    <tr>
+                        <td><%= i + 1 %></td>
+                        <td>
+                            <img src="/admin_assets/<%= card.photo %>" width="50">
+                        </td>
+                        <td><%= card.main_heading %></td>
+                        <td><%= card.description %></td>
+                        <td>
+                            <a href="/admin/edit_card/<%= card.id %>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="/admin/delete_card/<%= card.id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this card?');">🗑 Delete</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5" class="text-center text-danger">No cards found.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    
+    
+
+</body>
+</html>
+<%-include("footer.ejs")%>

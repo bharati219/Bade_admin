@@ -1,0 +1,106 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Care Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f4f4; }
+        .container { max-width: 85%; }
+
+        /* Box Styling */
+        .form-box, .table-box {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table Styling */
+        .table td, .table th { text-align: center; vertical-align: middle; font-size: 14px; }
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .action-btns .btn {
+            width: 80px;
+            height: 32px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .table-box { overflow-x: auto; }
+            .table th, .table td { font-size: 12px; padding: 5px; }
+            .action-btns .btn { width: 75px; height: 30px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <!-- Add Service Care Form -->
+    <div class="form-box">
+        <h5 class="text-primary text-center">Add Service Care</h5>
+        <form action="/admin/save_servicecare" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Care Title</label>
+                <input type="text" name="care_title" class="form-control" placeholder="Enter Care Title" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Care Description</label>
+                <textarea name="care_description" class="form-control" rows="3" placeholder="Enter Description" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Service Care</button>
+        </form>
+    </div>
+
+    <!-- Service Care List -->
+    <div class="table-box mt-4">
+        <h6 class="text-primary text-center">Service Care List</h6>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>SR NO</th>
+                        <th>Care Title</th>
+                        <th>Care Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (serviceCareList && serviceCareList.length > 0) { %>
+                        <% serviceCareList.forEach((row, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= row.care_title %></td>
+                                <td><%= row.care_description %></td>
+                                <td class="action-btns">
+                                    <a href="/admin/edit_servicecare/<%= row.care_id %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                                    <a href="/admin/delete_servicecare/<%= row.care_id %>" 
+                                       class="btn btn-danger btn-sm" 
+                                       onclick="return confirm('Are you sure you want to delete this entry?');">
+                                        🗑 Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4" class="text-center">No service care records found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<%- include("footer.ejs") %>

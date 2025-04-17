@@ -1,0 +1,69 @@
+<%- include('navbar.ejs') %>
+
+<div class="container mt-5">
+    <h2 class="text-center">Manage Ambulance Services</h2>
+
+    <!-- Add New Ambulance Service Form -->
+    <div class="card p-4 mb-4">
+        <h4>Add New Ambulance Service</h4>
+        <form action="/admin/save_ambulance" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label>Ambulance Service Title</label>
+                <input type="text" name="ambulance_title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="ambulance_description" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Ambulance Image</label>
+                <input type="file" name="ambulance_image" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+        </form>
+    </div>
+
+    <!-- List of Ambulance Services -->
+    <div class="card p-4">
+        <h4>Ambulance Services List</h4>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (ambulanceServiceList && ambulanceServiceList.length > 0) { %>
+                    <% ambulanceServiceList.forEach(service => { %>
+                        <tr>
+                            <td><%= service.ambulance_id %></td>
+                            <td><%= service.ambulance_title %></td>
+                            <td><%= service.ambulance_description %></td>
+                            <td>
+                                <img src="/admin_assets/<%= service.ambulance_image %>" width="80">
+                            </td>
+                            <td>
+                                <a href="/admin/edit_ambulance/<%= service.ambulance_id %>" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="/admin/delete_ambulance/<%= service.ambulance_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">No ambulance services found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>

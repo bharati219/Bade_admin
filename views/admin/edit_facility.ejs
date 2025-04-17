@@ -1,0 +1,19 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-4">
+    <h4 class="text-center">Edit Facility</h4>
+    <form action="/admin/update_facility/<%= facility.facility_id %>" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label>Facility Name</label>
+            <input type="text" name="facility_name" class="form-control" value="<%= facility.facility_name %>" required>
+        </div>
+        <div class="mb-3">
+            <label>Facility Image</label>
+            <input type="file" name="facility_image" class="form-control">
+            <img src="/admin_assets/<%= facility.facility_image %>" width="100" class="mt-2">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Facility</button>
+    </form>
+</div>
+
+<%- include("footer.ejs") %>

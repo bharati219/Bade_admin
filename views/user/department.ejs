@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bade Hospital</title>
+
+    <!-- AOS for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+    <!-- External CSS -->
+<style type="text/css">
+    
+        .img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dr {
+            font-family: cursive;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Navbar Animation */
+       /* Sticky Navbar */
+       .first{
+        margin-top: -70px;
+         color: #900078; 
+       }
+       .first a{
+         color:#900078 ;
+       }
+         .call-btn {
+       
+        background-color:   #9ACD32;
+        color: white;
+        font-weight: 600;
+        padding: 8px 15px;
+    }
+    .call-btn:hover {
+        background-color:   #9ACD32;
+    }
+  
+.navbar {
+
+    background-color: #FFC0CB !important;
+/*    position: fixed;*/
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+  .nav-link {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 15px;
+    }
+    .nav-link:hover {
+        color: #900078 !important;
+    }
+ .navbar-nav .nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #ff6600; /* Optional underline effect */
+}
+
+.navbar a {
+    color: black !important; /* Change to your preferred text color */
+    font-weight: bold;
+    text-decoration: none;
+}
+/* Add padding so content doesn't hide behind navbar */
+body {
+    padding-top: 70px; /* Adjust based on navbar height */
+}
+
+/* Navbar shadow when scrolling */
+.navbar.scrolled {
+    background-color:   #FFC0CB !important; /* Darker shade */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navbar Links Animation */
+        .navbar-nav .nav-item {
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .navbar-nav .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            transition: all 0.4s ease-in-out;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-item .nav-link:hover::after {
+            width: 100%;
+        }
+
+       
+        /* Dropdown Hover Effect */
+        .dropdown-menu {
+            background: #FFC0CB;
+            border: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: yellow;
+            color: black;
+        }
+
+        /* Appointment Button */
+        .app {
+            background: black;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            margin-left: 15px;
+        }
+
+        .app:hover {
+            background: grey;
+            transform: scale(1.1);
+            color: white;
+        }
+
+        /* Mobile View */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: center;
+            }
+            .app {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+ .hero-section {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Image Styling */
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Pink Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 192, 203, 0.2); /* Darker semi-transparent pink */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* "About Us" Text Styling */
+.hero-overlay h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 300px; /* Reduce height for mobile */
+    }
+
+    .hero-overlay h1 {
+        font-size: 36px; /* Adjust text size */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 250px; /* Further reduce height */
+    }
+
+    .hero-overlay h1 {
+        font-size: 28px; /* Smaller text for small screens */
+    }
+}
+/*Department start*/*/
+
+  .unit-card {
+            margin-bottom: 30px;
+        }
+        .unit-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+   .neurology-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .neurology-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .neurology-image {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .neurology-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .neurology-text {
+            flex: 1;
+            max-width: 45%;
+            padding: 20px;
+        }
+
+        .neurology-text h2 {
+            color: #C71585;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .neurology-text p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .neurology-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .neurology-image,
+            .neurology-text {
+                max-width: 100%;
+            }
+        }
+
+        /* Maternal-Fetal Medicine Section */
+.maternal-fetal-content {
+    margin: 50px auto;
+    max-width: 1200px;
+}
+
+/* Section Styling */
+.maternal-fetal-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+/* Alternating Image and Text */
+.maternal-fetal-section:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Text Styling */
+.maternal-fetal-text {
+    flex: 1;
+    padding: 20px;
+}
+
+.maternal-fetal-text h2 {
+    font-size: 26px;
+    color: #C71585;
+    margin-bottom: 10px;
+}
+
+.maternal-fetal-text p {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Image Styling */
+.maternal-fetal-image {
+    flex: 1;
+    text-align: center;
+}
+
+.maternal-fetal-image img {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.maternal-fetal-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .maternal-fetal-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .maternal-fetal-section:nth-child(even) {
+        flex-direction: column;
+    }
+
+    .maternal-fetal-text {
+        padding: 10px;
+    }
+
+    .maternal-fetal-image img {
+        width: 100%;
+    }
+}
+/* Lactation Support Section */
+.lactation-support {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 1200px;
+}
+
+/* Section Title */
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    color: #C71585;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* Row Styling */
+.lactation-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+/* Alternating Layout */
+.flex-md-row-reverse {
+    flex-direction: row-reverse;
+}
+
+/* Text Styling */
+.text-content {
+    padding: 20px;
+}
+
+.text-content h2 {
+    font-size: 26px;
+    color: #444;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.text-content p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Image Styling */
+.image-content {
+    text-align: center;
+}
+
+.image-content img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-content img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lactation-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .flex-md-row-reverse {
+        flex-direction: column;
+    }
+
+    .text-content {
+        padding: 10px;
+    }
+
+    .image-content img {
+        width: 90%;
+    }
+}
+
+</style> 
+</head>
+<body>
+    <%-include("navbar.ejs")%>
+  <div class="hero-section position-relative">
+    <img src="public/d4.jpg" class="hero-image img-fluid" alt="About Us">
+    <div class="hero-overlay text-center">
+        <h1>Department</h1>
+    </div>
+</div>
+
+    <div class="container mt-5" >
+        <h1 class="my-4 text-center" style="color:  #C71585">Obstetrics Department</h1>
+        <div class="row">
+            <!-- Antenatal Care Unit -->
+            <div class="col-md-4">
+                <div class="card unit-card">
+                    <img src="/admin_assets/<%-departments[2]['department_image']%>"  class="card-img-top" alt="Antenatal Care">
+                    <div class="card-body">
+                        <h5 class="card-title"><%-departments[0]['department_name']%></h5>
+                        <p class="card-text"><%-departments[0]['department_description']%></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Labor and Delivery Unit -->
+            <div class="col-md-4">
+                <div class="card unit-card">
+                    <img src="/admin_assets/<%-departments[3]['department_image']%>" class="card-img-top" alt="Labor and Delivery">
+                    <div class="card-body">
+                        <h5 class="card-title">Labor and Delivery Unit</h5>
+                        <p class="card-text">Equipped labor rooms with advanced medical technology, birthing suites, and operating rooms for cesarean sections.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Postnatal Care Unit -->
+            <div class="col-md-4">
+                <div class="card unit-card">
+                    <img src="/admin_assets/<%-departments[4]['department_image']%>" class="card-img-top" alt="Postnatal Care">
+                    <div class="card-body">
+                        <h5 class="card-title">Postnatal Care Unit</h5>
+                        <p class="card-text">Monitoring the mother's recovery, breastfeeding support, newborn health assessments, and guidance on postnatal care.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="container neurology-section">
+        <h1 class="text-center" style="color: #C71585">Neurology Department</h1>
+
+        <!-- Stroke Care -->
+        <div class="neurology-content">
+            <div class="neurology-image">
+                <img src="/admin_assets/<%-departments[5]['department_image']%>" alt="Stroke Care">
+            </div>
+            <div class="neurology-text">
+                <h2>Neonatal Intensive Care Unit (NICU)</h2>
+                <p> Offers specialized care for premature or ill newborns requiring close monitoring and advanced medical interventions.</p>
+            </div>
+        </div>
+
+        <!-- Neurodiagnostic Unit -->
+        <div class="neurology-content">
+            <div class="neurology-text">
+                <h2>Well-Baby Nursery:</h2>
+                <p>Cares for healthy newborns, monitoring their initial adaptation and providing routine postnatal care.</p>
+            </div>
+            <div class="neurology-image">
+                <img src="/admin_assets/<%-departments[6]['department_image']%>" alt="Neurodiagnostics">
+            </div>
+        </div>
+
+        <!-- Epilepsy & Seizure Unit -->
+        <div class="neurology-content">
+            <div class="neurology-image">
+                <img src="/admin_assets/<%-departments[7]['department_image']%>"alt="Epilepsy Care">
+            </div>
+            <div class="neurology-text">
+                <h2>Epilepsy & Seizure Unit</h2>
+                <p>We offer comprehensive epilepsy management, including medication, lifestyle guidance, and surgical interventions.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Maternal-Fetal Medicine Department -->
+<div class="maternal-fetal-content mt-3 mb-3">
+        <h1 class="text-center" style="color: #C71585">Maternal-Fetal Medicine Department</h1>
+    <!-- High-Risk Pregnancy Unit -->
+    <div class="maternal-fetal-section">
+        <div class="maternal-fetal-text">
+            <h2>High-Risk Pregnancy Unit</h2>
+            <p>Manages pregnancies with potential complications, providing specialized monitoring and treatment plans for both mother and fetus.</p>
+        </div>
+        <div class="maternal-fetal-image">
+            <img src="/admin_assets/<%-departments[8]['department_image']%>" alt="High-Risk Pregnancy Care">
+        </div>
+    </div>
+
+    <!-- Fetal Assessment Unit -->
+    <div class="maternal-fetal-section">
+        <div class="maternal-fetal-image">
+            <img src="/admin_assets/<%-departments[9]['department_image']%>"alt="Fetal Assessment">
+        </div>
+        <div class="maternal-fetal-text">
+            <h2>Fetal Assessment Unit</h2>
+            <p>Conducts detailed evaluations of fetal health through advanced imaging and screenings.</p>
+        </div>
+    </div>
+    <div class="container lactation-support">
+    <h1 class="section-title">Lactation Support Department</h1>
+
+    <!-- Breastfeeding Counseling Unit -->
+    <div class="row lactation-row">
+        <div class="col-md-6 text-content">
+            <h2>Breastfeeding Counseling Unit</h2>
+            <p>Our expert lactation consultants provide personalized guidance and support for new mothers, ensuring a smooth breastfeeding journey.</p>
+        </div>
+        <div class="col-md-6 image-content">
+            <img src="/admin_assets/<%-departments[0]['department_image']%>" alt="Breastfeeding Counseling" class="img-fluid rounded">
+        </div>
+    </div>
+
+    <!-- Milk Bank -->
+    <div class="row lactation-row flex-md-row-reverse">
+        <div class="col-md-6 text-content">
+            <h2>Milk Bank</h2>
+            <p>We collect, screen, and dispense donor breast milk to support premature and ill infants in the NICU, ensuring they receive essential nutrients.</p>
+        </div>
+        <div class="col-md-6 image-content">
+            <img src="public/milk.jpeg" alt="Milk Bank" class="img-fluid rounded">
+        </div>
+    </div>
+</div>
+    </div>
+    <%-include("footer.ejs")%>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the current page file name (without query parameters)
+    let currentPage = window.location.pathname.split("/").pop();
+
+    // If the URL ends with "/", assume it's "Navbar.html"
+    if (currentPage === "" || currentPage === "index.html") {
+        currentPage = "department.html"; // Change this if your homepage file is different
+    }
+
+    // Select all navbar links
+    let navLinks = document.querySelectorAll(".nav-link");
+
+    // Remove 'active' class from all links
+    navLinks.forEach(link => link.classList.remove("active"));
+
+    // Loop through links and add "active" class only to the matching one
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+});
+</script>
+</html>

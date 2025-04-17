@@ -1,0 +1,31 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary">Edit Package</h2>
+
+        <form action="/admin/update/<%= package.package_id %>" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Package Name:</label>
+                <input type="text" class="form-control" name="package_name" value="<%= package.package_name %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Package Title:</label>
+                <input type="text" class="form-control" name="package_title" value="<%= package.package_title %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Package Description:</label>
+                <textarea class="form-control" name="package_description" rows="4" required><%= package.package_description %></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success px-4">Update Package</button>
+                <a href="/admin/add_package" class="btn btn-secondary px-4">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

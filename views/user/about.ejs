@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bade Hospital</title>
+
+    <!-- AOS for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+    <!-- External CSS -->
+    <style type="text/css">
+        
+        .img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dr {
+            font-family: cursive;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Navbar Animation */
+       /* Sticky Navbar */
+       .first{
+        margin-top: -70px;
+         color: #900078; 
+       }
+       .first a{
+         color:#900078 ;
+       }
+         .call-btn {
+       
+        background-color:   #9ACD32;
+        color: white;
+        font-weight: 600;
+        padding: 8px 15px;
+    }
+    .call-btn:hover {
+        background-color:   #9ACD32;
+    }
+  
+.navbar {
+
+    background-color: #FFC0CB !important;
+/*    position: fixed;*/
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+  .nav-link {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 15px;
+    }
+    .nav-link:hover {
+        color: #900078 !important;
+    }
+
+     .navbar-nav .nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #ff6600; /* Optional underline effect */
+}
+
+.navbar a {
+    color: black !important; /* Change to your preferred text color */
+    font-weight: bold;
+    text-decoration: none;
+}
+/* Add padding so content doesn't hide behind navbar */
+body {
+    padding-top: 70px; /* Adjust based on navbar height */
+}
+
+/* Navbar shadow when scrolling */
+.navbar.scrolled {
+    background-color:   #FFC0CB !important; /* Darker shade */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navbar Links Animation */
+        .navbar-nav .nav-item {
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .navbar-nav .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            transition: all 0.4s ease-in-out;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-item .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Hover Effect */
+        .dropdown-menu {
+            background: #FFC0CB;
+            border: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: yellow;
+            color: black;
+        }
+
+        /* Appointment Button */
+        .app {
+            background: black;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            margin-left: 15px;
+        }
+
+        .app:hover {
+            background: grey;
+            transform: scale(1.1);
+            color: white;
+        }
+
+        /* Mobile View */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: center;
+            }
+            .app {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Image Styling */
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Pink Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 192, 203, 0.2); /* Darker semi-transparent pink */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* "About Us" Text Styling */
+.hero-overlay h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 300px; /* Reduce height for mobile */
+    }
+
+    .hero-overlay h1 {
+        font-size: 36px; /* Adjust text size */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 250px; /* Further reduce height */
+    }
+
+    .hero-overlay h1 {
+        font-size: 28px; /* Smaller text for small screens */
+    }
+}
+/* Vision and Mission Section */
+.vision-mission-section {
+    background-color: #f9f9f9; /* Light grey background for contrast */
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.section-title {
+    color: #C71585; /* Deep pink color matching the theme */
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .section-text {
+        font-size: 1rem;
+    }
+}
+
+.container-fluid {
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 50px 15px;
+    text-align: center;
+}
+
+/* Heading Styling */
+.container-fluid h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #d63384; /* Pink color */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+/* Underline Effect for Heading */
+.container-fluid h1::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background-color: #d63384;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Paragraph Styling */
+.container-fluid p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container-fluid h1 {
+        font-size: 28px;
+    }
+
+    .container-fluid p {
+        font-size: 16px;
+    }
+}
+
+/* Doctor Profile Section */
+.doctor-profile {
+    background-color: #fde4ec; /* Faint pink background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Doctor Image Styling */
+.doctor-image {
+    border-radius: 15px;
+    width: 100%;
+    max-width: 350px;
+    display: block;
+    margin: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.doctor-image:hover {
+    transform: scale(1.1);
+}
+
+/* Doctor Info Text */
+.doctor-info {
+    color: #333; /* Dark gray for readability */
+}
+
+.doctor-info h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #d63384; /* Deep pink for title */
+}
+
+/* Button Styling */
+.appointment-btn {
+    background-color: #d63384; /* Pink button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.appointment-btn:hover {
+    transform: scale(1.05);
+    background-color: #b0256e; /* Darker pink on hover */
+}
+
+/* Statistics Section */
+.stats-section {
+    width: 100%;
+    background-color: #fde4ec; /* Faint Pink Background */
+    padding: 60px 0;
+    color: #333;
+    text-align: center;
+}
+
+/* Stats Box */
+.stats-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9); /* Soft White Background */
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 90%; /* Ensures consistent width */
+    max-width: 300px; /* Prevents oversized boxes */
+    height: 180px; /* Fixed height for uniformity */
+    margin: 10px auto; /* Centers in smaller screens */
+}
+
+.stats-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Number Styling */
+.stats-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #d63384; /* Deep Pink */
+    margin-bottom: 5px;
+    font-family: "Arial", sans-serif;
+}
+
+/* Text Below Number */
+.stats-text {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 5px;
+    letter-spacing: 1px;
+    font-family: "Arial", sans-serif;
+    color: #444;
+}
+
+/* Flexbox Row Alignment */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds spacing between items */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-box {
+        width: 100%;
+        max-width: 250px;
+        height: 160px;
+    }
+
+    .stats-number {
+        font-size: 42px;
+    }
+
+    .stats-text {
+        font-size: 16px;
+    }
+}
+
+    </style>
+ 
+</head>
+<body>
+    <%-include("navbar.ejs")%>
+<div class="hero-section">
+    <img src="/admin_assets/<%-aslider[0]['img1']%>" class="hero-image" alt="About Us">
+    <div class="hero-overlay">
+        <h1><%- aslider[0]['text1'] %></h1>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1><%-info[0]['heading']%> </h1>
+        </div>
+        <div class="col-12">
+            <p><%-info[0]['details']%></p>
+        </div>
+    </div>
+</div>
+<!-- Doctor Profile Section -->
+   <div class="container my-5">
+        <div class="row doctor-profile p-4">
+            <!-- Doctor Image -->
+             <div class="col-md-4 text-center">
+                <img src="/admin_assets/<%- about[0]['img'] %>" alt="Dr. Ganesh Bade" class="doctor-image"><br>
+                <h3 class="mt-3"><%- about[0]['heading'] %></h3>
+            </div>
+
+            <!-- Doctor Information -->
+            <div class="col-md-8 doctor-info">
+                <h1><%- about[0]['heading'] %></h1>
+                <p><%- about[0]['info'] %></p>
+
+                <p><%- about[0]['info'] %></p>
+
+                <p><%- about[0]['info'] %></p> 
+
+                <!-- Appointment Button -->
+                 <a href="/appointment" class="appointment-btn">Make An Appointment ➝</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid vision-mission-section">
+    <div class="row">
+        <div class="col-12 mt-4">
+            <h2 class="section-title">Our Vision</h2>
+            <p class="section-text">To be the leading healthcare provider in the region, recognized for our commitment to patient care, medical excellence, and innovative services.</p>
+            <h2 class="section-title">Our Mission</h2>
+            <p class="section-text">To enhance the health and well-being of our community by delivering compassionate, high-quality medical care through a team of dedicated professionals.</p>
+        </div>
+    </div>
+</div>
+<section> 
+    <div class="container-fluid stats-section">
+        <div class="stats-container">
+            <% stats.forEach(function(stat) { %>
+                <div class="stats-box">
+                    <h2 class="stats-number"><%- stat.value %>+</h2>
+                    <p class="stats-text"><%- stat.title %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>  
+</section>
+
+<%-include("footer.ejs")%>
+
+
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the current page file name (without query parameters)
+    let currentPage = window.location.pathname.split("/").pop();
+
+    // If the URL ends with "/", assume it's "Navbar.html"
+    if (currentPage === "" || currentPage === "index.html") {
+        currentPage = "about.html"; // Change this if your homepage file is different
+    }
+
+    // Select all navbar links
+    let navLinks = document.querySelectorAll(".nav-link");
+
+    // Remove 'active' class from all links
+    navLinks.forEach(link => link.classList.remove("active"));
+
+    // Loop through links and add "active" class only to the matching one
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+});
+</script>
+</html>
+

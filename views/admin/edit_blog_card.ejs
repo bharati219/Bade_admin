@@ -1,0 +1,32 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Blog Card</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <form action="/admin/update_blog_card/<%= blogCard.card_id %>" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Card Title</label>
+                    <input type="text" name="card_title" class="form-control" value="<%= blogCard.card_title %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Card Description</label>
+                    <textarea name="card_description" class="form-control" required><%= blogCard.card_description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Current Image</label><br>
+                    <img src="/admin_assets/<%= blogCard.card_image %>" width="100" alt="Current Image">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">New Image (optional)</label>
+                    <input type="file" name="card_image" class="form-control">
+                    <input type="hidden" name="old_image" value="<%= blogCard.card_image %>">
+                </div>
+                <button type="submit" class="btn btn-success">Update Blog Card</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

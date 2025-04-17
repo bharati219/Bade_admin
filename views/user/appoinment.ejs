@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bade Hospital</title>
+
+    <!-- AOS for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+    <!-- External CSS -->
+<style type="text/css">
+    
+        .img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dr {
+            font-family: cursive;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Navbar Animation */
+       /* Sticky Navbar */
+       .first{
+        margin-top: -70px;
+         color: #900078; 
+       }
+       .first a{
+         color:#900078 ;
+       }
+         .call-btn {
+       
+        background-color:   #9ACD32;
+        color: white;
+        font-weight: 600;
+        padding: 8px 15px;
+    }
+    .call-btn:hover {
+        background-color:   #9ACD32;
+    }
+  
+.navbar {
+
+    background-color: #FFC0CB !important;
+/*    position: fixed;*/
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+  .nav-link {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 15px;
+    }
+    .nav-link:hover {
+        color: #900078 !important;
+    }
+
+.navbar a {
+    color: black !important; /* Change to your preferred text color */
+    font-weight: bold;
+    text-decoration: none;
+}
+/* Add padding so content doesn't hide behind navbar */
+body {
+    padding-top: 70px; /* Adjust based on navbar height */
+}
+
+/* Navbar shadow when scrolling */
+.navbar.scrolled {
+    background-color:   #FFC0CB !important; /* Darker shade */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navbar Links Animation */
+        .navbar-nav .nav-item {
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .navbar-nav .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background-color: yellow;
+            transition: all 0.4s ease-in-out;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-item .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: yellow !important;
+        }
+
+        /* Dropdown Hover Effect */
+        .dropdown-menu {
+            background: #FFC0CB;
+            border: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: yellow;
+            color: black;
+        }
+
+        /* Appointment Button */
+        .app {
+            background: black;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            margin-left: 15px;
+        }
+
+        .app:hover {
+            background: grey;
+            transform: scale(1.1);
+            color: white;
+        }
+
+        /* Mobile View */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: center;
+            }
+            .app {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+.appointment-section {
+    padding: 50px 0;
+    background-color: #f4f4f4;
+}
+
+/* Header Styling */
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #C71585;
+    margin-bottom: 20px;
+}
+
+p.text-center {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* Column Layout */
+.row {
+    margin-top: 40px;
+}
+
+/* Left Column (Hospital Details) */
+.col-md-6 h4 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.col-md-6 p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Form Styles */
+.appointment-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-form .form-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.appointment-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: border 0.3s;
+}
+
+.appointment-form .form-control:focus {
+    border-color: #C71585;
+    box-shadow: 0 0 5px rgba(199, 21, 133, 0.5);
+}
+
+.appointment-form button {
+    padding: 12px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #C71585;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.appointment-form button:hover {
+    background-color: #a31470;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .appointment-section {
+        padding: 30px 15px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .col-md-6 {
+        margin-bottom: 30px;
+    }
+
+    .appointment-form {
+        padding: 20px;
+    }
+
+    .appointment-form button {
+        font-size: 1rem;
+    }
+}
+</style> 
+</head>
+<body>
+<%-include("navbar.ejs")%>
+    <section class="appointment-section">
+        <div class="container">
+            <h2 class="text-center">Book an Appointment</h2>
+            <p class="text-center">Schedule a consultation with our expert doctors.</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Hospital Details</h4>
+                    <p><strong>Address:</strong> Opp. Hotel Oberoi, Savedi Road, Ahmednagar - 414001</p>
+                    <p><strong>Phone:</strong>0241-2424929 </p>
+                    <p><strong>Email:</strong>dr.badehospital@gmail.com</p>
+                    <p><strong>Working Hours:</strong>The hospital operates 24 hours a day, seven days a week, ensuring round-the-clock medical assistance</p>
+                </div>
+                
+                <div class="col-md-6">
+                    <form action="/save_appointment" method="post" class="appointment-form">
+                        <h2 class="text-center">Get in Touch</h2>
+                        <p class="text-center">Fill out the form and we will get back to you soon.</p>
+                    
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="mobile" class="form-label">Enter Mobile</label>
+                            <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Enter your mobile" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="doctor_name" class="form-label">Doctor Name</label>
+                            <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Enter Doctor name" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="4" placeholder="Write your message" required></textarea>
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+  <%-include("footer.ejs")%>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

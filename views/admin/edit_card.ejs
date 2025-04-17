@@ -1,0 +1,32 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Edit Card</h2>
+
+    <form action="/admin/update_card/<%= card.id %>" method="POST" enctype="multipart/form-data" class="mb-4">
+        <div class="mb-3">
+            <label class="form-label">Main Heading</label>
+            <input type="text" name="main_heading" class="form-control" value="<%= card.main_heading %>" required>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="2" required><%= card.description %></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Current Image</label><br>
+            <img src="/user_assets/<%= card.photo %>" width="100" class="mb-2">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Upload New Image (optional)</label>
+            <input type="file" name="photo" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Card</button>
+        <a href="/admin/card" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<%- include("footer.ejs") %>

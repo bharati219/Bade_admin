@@ -1,0 +1,167 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f4f4; }
+        .container { max-width: 85%; }
+
+        /* Form & Table Box */
+        .form-box, .table-box {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table */
+        .table td, .table th { vertical-align: middle; text-align: center; }
+        .table-box table { word-wrap: break-word; font-size: 14px; }
+        
+        /* Image Styling */
+        .img-thumbnail { width: 80px; height: 80px; border-radius: 8px; }
+
+        /* Title Styling */
+        .title-text {
+            max-width: 150px;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            display: block;
+            font-size: 14px;
+        }
+
+        /* Action Buttons - Centered & Same Size */
+        .action-btns {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 8px;
+        }
+        .action-btns .btn {
+            padding: 6px 12px;
+            font-size: 14px;
+            width: 80px;  /* Ensures same width */
+            height: 32px; /* Ensures same height */
+            text-align: center;
+        }
+
+        /* Responsive Table */
+        @media (max-width: 768px) {
+            .table-box {
+                overflow-x: auto;
+            }
+            .table th, .table td {
+                font-size: 12px;
+                padding: 5px;
+            }
+            .img-thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+            .title-text {
+                max-width: 120px;
+                font-size: 12px;
+            }
+            .action-btns {
+                flex-direction: row;
+                gap: 5px;
+            }
+            .action-btns .btn {
+                width: 75px;
+                height: 30px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <!-- Add Slider Form -->
+    <div class="form-box">
+        <h5 class="text-primary text-center">Add Slider</h5>
+        <form action="/admin/save_slider" method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+                <!-- Titles -->
+                <div class="col-md-6">
+                    <input type="text" name="text1" class="form-control mb-3" placeholder="Title 1" required>
+                    <input type="text" name="text2" class="form-control mb-3" placeholder="Title 2" required>
+                    <input type="text" name="text3" class="form-control" placeholder="Title 3" required>
+                </div>
+
+                <!-- Images -->
+                <div class="col-md-6">
+                    <input type="file" name="img1" class="form-control mb-3" required>
+                    <input type="file" name="img2" class="form-control mb-3" required>
+                    <input type="file" name="img3" class="form-control" required>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100">Save Slider</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Slider List -->
+    <div class="table-box mt-4">
+        <h6 class="text-primary text-center">Slider List</h6>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>SR NO</th>
+                        <th>Title 1 & Image</th>
+                        <th>Title 2 & Image</th>
+                        <th>Title 3 & Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (slider.length > 0) { %>
+                        <% slider.forEach((row,i) => { %>
+                            <tr>
+                                <td><%- i + 1 %></td>
+                                <td>
+                                    <img src="/admin_assets/<%- row.img1 %>" class="img-thumbnail"><br>
+                                    <span class="title-text"><%- row.text1 %></span>
+                                </td>
+                                <td>
+                                    <img src="/admin_assets/<%- row.img2 %>" class="img-thumbnail"><br>
+                                    <span class="title-text"><%- row.text2 %></span>
+                                </td>
+                                <td>
+                                    <img src="/admin_assets/<%- row.img3 %>" class="img-thumbnail"><br>
+                                    <span class="title-text"><%- row.text3 %></span>
+                                </td>
+                                <td class="action-btns">
+                                    <a href="/admin/edit_slider/<%- row.slider_id %>">
+                                        <button class="btn btn-warning btn-sm">✏ Edit</button>
+                                    </a>
+                                    <a href="/admin/delete_slider/<%- row.slider_id %>">
+                                        <button class="btn btn-danger btn-sm">🗑 Delete</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" class="text-center">No sliders found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<%-include("footer.ejs"); %>			

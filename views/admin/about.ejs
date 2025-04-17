@@ -1,0 +1,117 @@
+<%- include("navbar.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form & List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f4f4; }
+        .container { max-width: 90%; margin-top: 20px; }
+        .form-box, .table-box {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        .table td, .table th { vertical-align: middle; text-align: center; }
+        .action-btns { display: flex; justify-content: center; gap: 5px; }
+        .action-btns .btn { width: 70px; height: 32px; font-size: 14px; }
+        .table-responsive { overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Form -->
+    <div class="form-box">
+        <h4 class="text-center text-primary">Add About</h4>
+        <form action="/admin/save_about" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" name="img" class="img-thumbnail mb-3" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Heading</label>
+                <input type="text" name="heading" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Information</label>
+                <textarea class="form-control" name="info" required></textarea>
+            </div>
+
+            <!-- Tags (2 per row) -->
+            <div class="mb-3">
+                <label class="form-label">Tags</label>
+                <div class="row g-2">
+                    <% for (let i = 1; i <= 3; i++) { %>
+                    <div class="col-md-6 col-sm-12">
+                        <input type="text" name="tag<%= i %>" class="form-control" placeholder="Tag <%= i %>">
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+    </div>
+
+    <!-- List -->
+    <div class="table-box mt-4">
+        <h5 class="text-center text-primary">Item List</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Image</th>
+                        <th>Heading</th>
+                        <th>Info</th>
+                        <th>Tags</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (about.length > 0) { %>
+                        <% about.forEach((row, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td>
+                                    <img src="/admin_assets/<%= row.img %>" class="img-thumbnail" width="100">
+                                </td>
+                                 <td><%-row.heading%></td>
+                                 <td><%-row.info%></td>
+                                 <td>
+                                    <% for (let i = 1; i <= 8; i++) { %>
+                                        <% if (row["tag" + i]) { %>
+                                            <span class="badge bg-dark"><%= row["tag" + i] %></span>
+                                        <% } %>
+                                    <% } %>
+                                </td>
+
+                                <td class="action-btns">
+                                    <a href="/admin/edit_about/<%= row.about_id %>">
+                                        <button class="btn btn-warning btn-sm">✏ Edit</button>
+                                    </a>
+                                    <a href="/admin/delete_about/<%= row.about_id %>" onclick="return confirm('Are you sure?');">
+                                        <button class="btn btn-danger btn-sm">🗑 Delete</button>
+                                    </a>
+                                </td>
+                                
+                        </tr>
+                        <% }); %>
+                        <% } else { %>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No records found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<%- include("footer.ejs") %>

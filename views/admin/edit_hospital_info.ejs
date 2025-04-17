@@ -1,0 +1,43 @@
+<%- include("navbar.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Hospital Info</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f4f4; }
+        .container { max-width: 50%; margin-top: 20px; }
+        .form-box {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Edit Form Section -->
+    <div class="form-box">
+        <h4 class="text-center text-warning">Edit About Info</h4>
+        <form action="/admin/update_hospital_info/<%= info.id %>" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Heading</label>
+                <input type="text" name="heading" class="form-control" value="<%= info.heading %>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Information</label>
+                <textarea class="form-control" name="info" required><%= info.details %></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Update</button>
+            <a href="/admin/hospital_info" class="btn btn-secondary w-100 mt-2">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<%- include("footer.ejs") %>

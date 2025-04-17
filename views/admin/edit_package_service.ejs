@@ -1,0 +1,45 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Edit Package Service</h1>
+
+    <div class="card p-4 shadow-lg mx-auto" style="max-width: 600px;">
+        <form action="/admin/update_package_service/<%= service.pservice_id %>" method="POST" enctype="multipart/form-data">
+            
+            <div class="mb-3">
+                <label class="form-label">Select Package:</label>
+                <select name="package_id" class="form-select" required>
+                    <% packages.forEach(package => { %>
+                        <option value="<%= package.package_id %>" <%= package.package_id === service.package_id ? 'selected' : '' %>>
+                            <%= package.package_name %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Service Title:</label>
+                <input type="text" name="service_title" class="form-control" value="<%= service.service_title %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Service Description:</label>
+                <textarea name="service_description" class="form-control" rows="3" required><%= service.service_description %></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Current Image:</label><br>
+                <img src="/<%-service.service_image %>" class="img-thumbnail d-block mb-2" width="120">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload New Image:</label>
+                <input type="file" name="new_service_image" class="form-control" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Update Service</button>
+        </form>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

@@ -1,0 +1,16 @@
+<%- include("navbar.ejs") %>
+<div class="container mt-4">
+    <h4 class="text-center text-primary">Edit Statistic</h4>
+    <form action="/admin/update_statistics/<%= stat.id %>" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="<%= stat.title %>" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Value</label>
+            <input type="number" name="value" class="form-control" value="<%= stat.value %>" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Update</button>
+    </form>
+</div>
+<%- include("footer.ejs") %>

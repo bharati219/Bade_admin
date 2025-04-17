@@ -1,0 +1,62 @@
+<%- include("navbar.ejs") %> <!-- Include Admin Navbar -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hospital Statistics - Admin</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center text-primary">Hospital Statistics</h2>
+
+    <!-- Add New Stat Form -->
+    <div class="form-box">
+        <form action="/admin/save_stat" method="POST">
+            <input type="text" name="title" placeholder="Enter Title" class="form-control mb-2" required>
+            <input type="number" name="value" placeholder="Enter Value" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-primary w-100">Add</button>
+        </form>
+    </div>
+
+    <!-- Display Stats -->
+    <div class="table-box mt-4">
+        <table class="table table-bordered text-center">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (stats.length > 0) { %>
+                    <% stats.forEach(stat => { %>
+                        <tr>
+                            <td><%= stat.id %></td>
+                            <td><%= stat.title %></td>
+                            <td><%= stat.value %>+</td>
+                            <td>
+                            
+                                <a href="/admin/edit_statistics/<%= stat.id %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                                
+                                <a href="/admin/delete_stat/<%= stat.id %>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">🗑 Delete</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4" class="text-muted text-center">No records found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %> <!-- Include Footer -->

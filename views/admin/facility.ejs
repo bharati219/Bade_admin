@@ -1,0 +1,121 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f4f4; }
+        .container { max-width: 85%; }
+
+        /* Box Styling */
+        .form-box, .table-box {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table Styling */
+        .table td, .table th { text-align: center; vertical-align: middle; font-size: 14px; }
+        .img-thumbnail { width: 80px; height: 80px; border-radius: 8px; }
+
+        /* Text Formatting */
+        .title-text {
+            max-width: 150px;
+            white-space: normal;
+            overflow: hidden;
+            word-wrap: break-word;
+            display: block;
+            font-size: 14px;
+        }
+
+        /* Action Buttons */
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .action-btns .btn {
+            width: 80px;
+            height: 32px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .table-box { overflow-x: auto; }
+            .table th, .table td { font-size: 12px; padding: 5px; }
+            .img-thumbnail { width: 60px; height: 60px; }
+            .title-text { max-width: 120px; font-size: 12px; }
+            .action-btns .btn { width: 75px; height: 30px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <!-- Add Facility Form -->
+    <div class="form-box">
+        <h5 class="text-primary text-center">Add Facility</h5>
+        <form action="/admin/save_facility" method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" name="facility_name" class="form-control mb-3" placeholder="Facility Name" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="file" name="facility_image" class="form-control mb-3" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100">Save Facility</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Facility List -->
+    <div class="table-box mt-4">
+        <h6 class="text-primary text-center">Facility List</h6>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>SR NO</th>
+                        <th>Facility Name & Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (facilityList && facilityList.length > 0) { %>
+                        <% facilityList.forEach((facility, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td>
+                                    <img src="/admin_assets/<%= facility.facility_image %>" class="img-thumbnail">
+                                    <br>
+                                    <span class="title-text"><%= facility.facility_name %></span>
+                                </td>
+                                <td class="action-btns">
+                                    <a href="/admin/edit_facility/<%= facility.facility_id %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                                    <a href="/admin/delete_facility/<%= facility.facility_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="3" class="text-center">No facilities found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<%- include("footer.ejs") %>

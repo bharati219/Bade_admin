@@ -1,0 +1,35 @@
+<%- include('navbar.ejs') %>
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Ambulance Service</h2>
+
+    <div class="card p-4">
+        <form action="/admin/update_ambulance/<%= ambulanceService.ambulance_id %>" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label>Ambulance Service Title</label>
+                <input type="text" name="ambulance_title" class="form-control" value="<%= ambulanceService.ambulance_title %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="ambulance_description" class="form-control" required><%= ambulanceService.ambulance_description %></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label>Current Image</label><br>
+                <img src="/admin_assets/<%= ambulanceService.ambulance_image %>" width="100">
+                <input type="hidden" name="old_image" value="<%= ambulanceService.ambulance_image %>">
+            </div>
+
+            <div class="mb-3">
+                <label>Upload New Image (optional)</label>
+                <input type="file" name="ambulance_image" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+            <a href="/admin/ambulance_service" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>

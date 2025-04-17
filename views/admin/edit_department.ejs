@@ -1,0 +1,32 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Department</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <form action="/admin/update_department/<%= department.department_id %>" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Department Name</label>
+                    <input type="text" name="department_name" class="form-control" value="<%= department.department_name %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Department Description</label>
+                    <textarea name="department_description" class="form-control" required><%= department.department_description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Current Image</label><br>
+                    <img src="/admin_assets/<%= department.department_image %>" width="100" alt="Department Image">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Change Image (Optional)</label>
+                    <input type="file" name="department_image" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Department</button>
+                <a href="/admin/add_department" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

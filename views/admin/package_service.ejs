@@ -1,0 +1,69 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Add Package Service</h1>
+
+    <div class="card p-4 shadow-lg">
+        <form action="/admin/add_package_service" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Select Package:</label>
+                <select name="package_id" class="form-select" required>
+                    <option value="">Select a Package</option>
+                    <% packages.forEach(package => { %>
+                        <option value="<%= package.package_id %>"><%= package.package_name %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Service Title:</label>
+                <input type="text" name="service_title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Service Description:</label>
+                <textarea name="service_description" class="form-control" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload Image:</label>
+                <input type="file" name="service_image" class="form-control" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Add Service</button>
+        </form>
+    </div>
+
+    <hr class="my-5">
+
+    <h1 class="text-center mb-4">Package Services List</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Package Name</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% packageServices.forEach(service => { %>
+                <tr>
+                    <td><%= service.package_name %></td>
+                    <td><%= service.service_title %></td>
+                    <td><%= service.service_description %></td>
+                    <td><img src="/<%= service.service_image %>" width="80" class="img-thumbnail"></td>
+                    <td>
+                        <a href="/admin/edit_package_service/<%= service.pservice_id %>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/admin/delete_package_service/<%= service.pservice_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

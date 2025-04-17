@@ -1,0 +1,56 @@
+
+<!-- Emergency Contact Bar -->
+
+<section class="first">  
+    <div class="bg-light py-2 text-center">
+        <span class="fw-bold text-purple">
+            <i class="fas fa-phone"></i> For Emergency Ambulance: 
+            <a href="tel:8888822222" class="text-purple text-decoration-none">88888 22222</a>
+        </span>
+    </div>
+    </section>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="Navbar.html">
+                <img src="public/logo1.webp" alt="Logo" class="img-fluid me-2" style="height: 45px;">
+            </a>
+    
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/#" id="packagesDropdown" role="button" data-bs-toggle="dropdown">
+                            Packages
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="packagesDropdown">
+                            <% packages.forEach(function(pack) { %>
+                            <li><a class="dropdown-item" href="/package/<%- pack.package_id %>"><%- pack.package_name %></a></li>
+                            <% }); %>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/gallery">Speciality Clinic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blog">Blogs/Videos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/department">Department</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                </ul>
+    
+                <!-- Call Button -->
+                <a href="/appointment" class="btn rounded-pill call-btn">
+                    <i class="fas fa-phone"></i> Appointment
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

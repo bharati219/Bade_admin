@@ -1,0 +1,66 @@
+<%- include('navbar.ejs') %>
+
+<div class="container mt-5">
+    <h2 class="text-center">Manage Specialized Services</h2>
+
+    <!-- Add New Special Service Form -->
+    <div class="card p-4 mb-4">
+        <h4>Add New Special Service</h4>
+        <form action="/admin/save_specialservice" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label>Special Service Title</label>
+                <input type="text" name="special_title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="special_description" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Upload Image</label>
+                <input type="file" name="special_image" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <!-- List of Special Services -->
+    <div class="card p-4">
+        <h4>Special Services List</h4>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (specialServiceList && specialServiceList.length > 0) { %>
+                    <% specialServiceList.forEach(service => { %>
+                        <tr>
+                            <td><%= service.special_id %></td>
+                            <td><%= service.special_title %></td>
+                            <td><%= service.special_description %></td>
+                            <td>
+                                <img src="/admin_assets/<%= service.special_image %>" width="50">
+                            </td>
+                            <td>
+                                <a href="/admin/edit_specialservice/<%= service.special_id %>" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/admin/delete_specialservice/<%= service.special_id %>" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5" class="text-center">No services found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>
